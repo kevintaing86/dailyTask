@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import CoreData
 
 class taskItem {
     var title: String!
@@ -28,4 +28,5 @@ class taskItem {
     
 }
 
-var taskList = [taskItem]()
+//var taskList = [taskItem]()
+var taskList = [NSManagedObject]()
