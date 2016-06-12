@@ -30,3 +30,4 @@ class taskItem {
 
 //var taskList = [taskItem]()
 var taskList = [NSManagedObject]()
+//var taskMangeContext = NSManagedObjectContext()

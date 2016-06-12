@@ -18,22 +18,25 @@ class viewTaskVC: UIViewController {
     // MARK: - Actions and Functions
     @IBAction func editButton(sender: AnyObject) {
         let evc = storyboard?.instantiateViewControllerWithIdentifier("editTask") as! editTaskVC
-        evc.taskIndex = taskListIndex!
+        evc.taskListIndex = taskListIndex!
         navigationController?.pushViewController(evc, animated: true)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        naviItem.title = taskList[taskListIndex].title
-//        descField.text = taskList[taskListIndex].description
+        let task = taskList[taskListIndex]
+
+        naviItem.title = task.valueForKey("taskTitle") as? String
+        descField.text = task.valueForKey("taskDescription") as? String
         
         
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(animated: Bool) {
-//        naviItem.title = taskList[taskListIndex].title
-//        descField.text = taskList[taskListIndex].description
+        let task = taskList[taskListIndex]
+        naviItem.title = task.valueForKey("taskTitle") as? String
+        descField.text = task.valueForKey("taskDescription") as? String
 
     }
 

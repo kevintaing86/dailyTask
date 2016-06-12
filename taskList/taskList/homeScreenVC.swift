@@ -85,7 +85,18 @@ class homeScreenVC: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
         if(editingStyle == .Delete) {
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let managedContext = appDelegate.managedObjectContext
+            let task = taskList[indexPath.row]
             taskList.removeAtIndex(indexPath.row)
+            managedContext.deleteObject(task)
+            
+            do{
+             try managedContext.save()
+            } catch let error as NSError {
+                print("Error in saving after delete \(error)")
+            }
+            
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
         
