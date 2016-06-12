@@ -11,8 +11,10 @@ import UIKit
 class viewTaskVC: UIViewController {
 
     // MARK: - Outlets and Variables
+    @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var descField: UITextView!
     @IBOutlet weak var naviItem: UINavigationItem!
+    let dateFormatter = NSDateFormatter()
     var taskListIndex: Int!
     
     // MARK: - Actions and Functions
@@ -24,10 +26,12 @@ class viewTaskVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dateFormatter.dateStyle = .MediumStyle
         let task = taskList[taskListIndex]
 
         naviItem.title = task.valueForKey("taskTitle") as? String
         descField.text = task.valueForKey("taskDescription") as? String
+        dateLabel.text = dateFormatter.stringFromDate(task.valueForKey("taskDate") as! NSDate)
         
         
         // Do any additional setup after loading the view.
@@ -37,6 +41,7 @@ class viewTaskVC: UIViewController {
         let task = taskList[taskListIndex]
         naviItem.title = task.valueForKey("taskTitle") as? String
         descField.text = task.valueForKey("taskDescription") as? String
+        dateLabel.text = dateFormatter.stringFromDate(task.valueForKey("taskDate") as! NSDate)
 
     }
 
