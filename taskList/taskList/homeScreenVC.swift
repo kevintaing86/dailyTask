@@ -12,7 +12,7 @@ import CoreData
 class homeScreenVC: UITableViewController {
 
     // MARK: - Outlets
-    
+    let dateFormatter = NSDateFormatter()
     
     // MARK: - Actions
     @IBAction func addButton(sender: AnyObject) {
@@ -64,6 +64,7 @@ class homeScreenVC: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        dateFormatter.dateStyle = .MediumStyle
         
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! customCell
         
@@ -71,6 +72,7 @@ class homeScreenVC: UITableViewController {
         
         cell.taskTitle.text = task.valueForKey("taskTitle") as? String
         cell.taskDesc.text = task.valueForKey("taskDescription") as? String
+        cell.taskedate.text = dateFormatter.stringFromDate(task.valueForKey("taskDate") as! NSDate)
         
         return cell
     }

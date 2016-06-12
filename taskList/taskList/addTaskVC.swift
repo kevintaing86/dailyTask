@@ -14,6 +14,9 @@ class addTaskVC: UIViewController {
     // MARK: - Outlets and Variables
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var descriptionField: UITextView!
+    @IBOutlet weak var dateField: UITextField!
+    let dateFormatter = NSDateFormatter()
+    var userDate = NSDate!()
     
     // MARK: - Actions and Funcitons
     @IBAction func cancelButton(sender: AnyObject) {
@@ -21,11 +24,14 @@ class addTaskVC: UIViewController {
     }
     
     @IBAction func createButton(sender: AnyObject) {
-        saveTask(titleField.text!, desc: descriptionField.text)
+        dateFormatter.dateStyle = .MediumStyle
+        userDate = dateFormatter.dateFromString(dateField.text!)!
+        
+        saveTask(titleField.text!, desc: descriptionField.text, taskDate: userDate!)
         navigationController?.popViewControllerAnimated(true)
     }
     
-    func saveTask(name: String, desc: String) {
+    func saveTask(name: String, desc: String, taskDate: NSDate) {
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let managedContext = appDelegate.managedObjectContext
@@ -36,6 +42,7 @@ class addTaskVC: UIViewController {
         
         task.setValue(name, forKey: "taskTitle")
         task.setValue(desc, forKey: "taskDescription")
+        task.setValue(taskDate, forKey: "taskDate")
         
         do{
             try managedContext.save()
@@ -45,6 +52,18 @@ class addTaskVC: UIViewController {
         }
     }
     
+    @IBAction func dateBeganEditing(sender: AnyObject) {
+        let datePicker = UIDatePicker()
+        dateField.inputView = datePicker
+        datePicker.addTarget(self, action: #selector(addTaskVC.datePickerChanged(_:)), forControlEvents: .ValueChanged)
+    }
+    
+    func datePickerChanged(sender: UIDatePicker) {
+        dateFormatter.dateStyle = .MediumStyle
+        
+        dateField.text = dateFormatter.stringFromDate(sender.date)
+        
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
