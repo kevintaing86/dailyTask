@@ -19,8 +19,8 @@
 		A11CDBE71CE634AF008DFFA4 /* customCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11CDBE61CE634AF008DFFA4 /* customCell.swift */; };
 		A11CDBE91CE64482008DFFA4 /* viewTaskVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A11CDBE81CE64482008DFFA4 /* viewTaskVC.swift */; };
 		A16458731D0C923300536E2B /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = A16458711D0C923300536E2B /* DataModel.xcdatamodeld */; };
-		A164587D1D0C93FE00536E2B /* TaskItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A164587B1D0C93FE00536E2B /* TaskItem+CoreDataProperties.swift */; };
-		A164587E1D0C93FE00536E2B /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A164587C1D0C93FE00536E2B /* TaskItem.swift */; };
+		A16458C71D0CD3BB00536E2B /* TaskItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16458C51D0CD3BB00536E2B /* TaskItem+CoreDataProperties.swift */; };
+		A16458C81D0CD3BB00536E2B /* TaskItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = A16458C61D0CD3BB00536E2B /* TaskItem.swift */; };
 		A1E397601CE6E4EB0089121D /* editTaskVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1E3975F1CE6E4EB0089121D /* editTaskVC.swift */; };
 /* End PBXBuildFile section */
 
@@ -60,8 +60,8 @@
 		A11CDBE61CE634AF008DFFA4 /* customCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = customCell.swift; sourceTree = "<group>"; };
 		A11CDBE81CE64482008DFFA4 /* viewTaskVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = viewTaskVC.swift; sourceTree = "<group>"; };
 		A16458721D0C923300536E2B /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
-		A164587B1D0C93FE00536E2B /* TaskItem+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TaskItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
-		A164587C1D0C93FE00536E2B /* TaskItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
+		A16458C51D0CD3BB00536E2B /* TaskItem+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TaskItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A16458C61D0CD3BB00536E2B /* TaskItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TaskItem.swift; sourceTree = "<group>"; };
 		A1E3975F1CE6E4EB0089121D /* editTaskVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = editTaskVC.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -93,8 +93,8 @@
 		A11CDBA61CE62514008DFFA4 = {
 			isa = PBXGroup;
 			children = (
-				A164587B1D0C93FE00536E2B /* TaskItem+CoreDataProperties.swift */,
-				A164587C1D0C93FE00536E2B /* TaskItem.swift */,
+				A16458C51D0CD3BB00536E2B /* TaskItem+CoreDataProperties.swift */,
+				A16458C61D0CD3BB00536E2B /* TaskItem.swift */,
 				A11CDBE21CE62A87008DFFA4 /* dataModel.swift */,
 				A11CDBB11CE62514008DFFA4 /* taskList */,
 				A11CDBC61CE62514008DFFA4 /* taskListTests */,
@@ -282,12 +282,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				A11CDBB31CE62514008DFFA4 /* AppDelegate.swift in Sources */,
-				A164587E1D0C93FE00536E2B /* TaskItem.swift in Sources */,
+				A16458C81D0CD3BB00536E2B /* TaskItem.swift in Sources */,
 				A16458731D0C923300536E2B /* DataModel.xcdatamodeld in Sources */,
 				A11CDBE11CE62A60008DFFA4 /* homeScreenVC.swift in Sources */,
 				A11CDBE71CE634AF008DFFA4 /* customCell.swift in Sources */,
 				A11CDBE31CE62A87008DFFA4 /* dataModel.swift in Sources */,
-				A164587D1D0C93FE00536E2B /* TaskItem+CoreDataProperties.swift in Sources */,
+				A16458C71D0CD3BB00536E2B /* TaskItem+CoreDataProperties.swift in Sources */,
 				A11CDBE91CE64482008DFFA4 /* viewTaskVC.swift in Sources */,
 				A1E397601CE6E4EB0089121D /* editTaskVC.swift in Sources */,
 				A11CDBE51CE63210008DFFA4 /* addTaskVC.swift in Sources */,
@@ -440,7 +440,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mycompany.taskList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "taskList-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -457,7 +456,6 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.mycompany.taskList;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "taskList-Bridging-Header.h";
 			};
 			name = Release;
 		};

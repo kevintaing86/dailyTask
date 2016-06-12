@@ -23,10 +23,26 @@ class homeScreenVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate
+        
+        let managedContext = appDelegate?.managedObjectContext
+        
+        let fetchRequest = NSFetchRequest(entityName: "TaskItem")
+        
+        do {
+            let results = try managedContext?.executeFetchRequest(fetchRequest)
+            taskList = results as! [NSManagedObject]
+        } catch let error as NSError{
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
 
     }
     
     override func viewDidAppear(animated: Bool) {
+        
+        
         tableView.reloadData()
     }
 
@@ -51,8 +67,10 @@ class homeScreenVC: UITableViewController {
         
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! customCell
         
-        cell.taskTitle.text = taskList[indexPath.row].title
-        cell.taskDesc.text = taskList[indexPath.row].description
+        let task = taskList[indexPath.row]
+        
+        cell.taskTitle.text = task.valueForKey("taskTitle") as? String
+        cell.taskDesc.text = task.valueForKey("taskDescription") as? String
         
         return cell
     }

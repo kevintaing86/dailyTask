@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class addTaskVC: UIViewController {
 
@@ -18,12 +19,31 @@ class addTaskVC: UIViewController {
     @IBAction func cancelButton(sender: AnyObject) {
         navigationController?.popViewControllerAnimated(true)
     }
+    
     @IBAction func createButton(sender: AnyObject) {
-        let newTask: taskItem = taskItem(userTitle: titleField.text!, userDescription: descriptionField.text)
-        taskList.append(newTask)
+        saveTask(titleField.text!, desc: descriptionField.text)
         navigationController?.popViewControllerAnimated(true)
     }
-
+    
+    func saveTask(name: String, desc: String) {
+        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let managedContext = appDelegate.managedObjectContext
+        
+        let newEntity = NSEntityDescription.entityForName("TaskItem", inManagedObjectContext: managedContext)
+        
+        let task = NSManagedObject(entity: newEntity!, insertIntoManagedObjectContext: managedContext)
+        
+        task.setValue(name, forKey: "taskTitle")
+        task.setValue(desc, forKey: "taskDescription")
+        
+        do{
+            try managedContext.save()
+            taskList.append(task)
+        } catch let error as NSError{
+            print("Could not save \(error), \(error.userInfo)")
+        }
+    }
     
     
     override func viewDidLoad() {

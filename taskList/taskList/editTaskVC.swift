@@ -20,16 +20,18 @@ class editTaskVC: UIViewController {
         navigationController?.popViewControllerAnimated(true)
     }
     @IBAction func updateButton(sender: AnyObject) {
-        taskList[taskIndex].title = newTitleField.text
-        taskList[taskIndex].description = newDescField.text
+
         navigationController?.popViewControllerAnimated(true)
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        newTitleField.text = taskList[taskIndex].title
-        newDescField.text = taskList[taskIndex].description
+        let task = taskList[taskIndex]
+        newTitleField.text = task.valueForKey("taskTitle") as? String
+        newDescField.text = task.valueForKey("taskDescription") as? String
+//        newTitleField.text = taskList[taskIndex].title
+//        newDescField.text = taskList[taskIndex].description
         // Do any additional setup after loading the view.
     }
 

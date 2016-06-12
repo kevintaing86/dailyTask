@@ -24,16 +24,16 @@ class viewTaskVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        naviItem.title = taskList[taskListIndex].title
-        descField.text = taskList[taskListIndex].description
+//        naviItem.title = taskList[taskListIndex].title
+//        descField.text = taskList[taskListIndex].description
         
         
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(animated: Bool) {
-        naviItem.title = taskList[taskListIndex].title
-        descField.text = taskList[taskListIndex].description
+//        naviItem.title = taskList[taskListIndex].title
+//        descField.text = taskList[taskListIndex].description
 
     }
 

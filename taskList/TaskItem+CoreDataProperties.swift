@@ -14,7 +14,7 @@ import CoreData
 
 extension TaskItem {
 
-    @NSManaged var taskTitle: String?
     @NSManaged var taskDescription: String?
+    @NSManaged var taskTitle: String?
 
 }
