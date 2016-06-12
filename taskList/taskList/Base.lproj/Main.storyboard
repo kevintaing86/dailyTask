@@ -268,8 +268,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Task Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lzc-C6-RfU">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Task Title:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lzc-C6-RfU">
                                 <rect key="frame" x="20" y="111" width="85" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="85" id="5Ra-el-UGB"/>
+                                </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
@@ -315,21 +318,21 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="FfA-Ip-GPW" firstAttribute="trailing" secondItem="Xg5-vt-thq" secondAttribute="trailing" id="7KX-Rr-gMr"/>
-                            <constraint firstItem="Xg5-vt-thq" firstAttribute="leading" secondItem="cX0-Hk-nyh" secondAttribute="leading" id="AsI-6j-M9z"/>
+                            <constraint firstItem="Xg5-vt-thq" firstAttribute="trailing" secondItem="hf1-EW-Kr9" secondAttribute="trailing" id="0we-7F-Xmx"/>
                             <constraint firstItem="hf1-EW-Kr9" firstAttribute="trailing" secondItem="LTA-Jf-Xa2" secondAttribute="trailingMargin" id="DCc-kc-fY4"/>
+                            <constraint firstItem="e6e-00-WvH" firstAttribute="top" secondItem="Xg5-vt-thq" secondAttribute="bottom" constant="95" id="DnZ-pV-yzb"/>
                             <constraint firstItem="e6e-00-WvH" firstAttribute="leading" secondItem="FfA-Ip-GPW" secondAttribute="leading" id="Ewx-pS-m3u"/>
-                            <constraint firstItem="Xg5-vt-thq" firstAttribute="centerX" secondItem="hf1-EW-Kr9" secondAttribute="centerX" id="PP7-L1-uK7"/>
                             <constraint firstItem="FfA-Ip-GPW" firstAttribute="top" secondItem="e6e-00-WvH" secondAttribute="bottom" constant="8" symbolic="YES" id="TyH-2r-LQm"/>
+                            <constraint firstItem="Xg5-vt-thq" firstAttribute="centerX" secondItem="hf1-EW-Kr9" secondAttribute="centerX" id="UO2-dv-qRP"/>
                             <constraint firstItem="hf1-EW-Kr9" firstAttribute="top" secondItem="LTA-Jf-Xa2" secondAttribute="top" constant="140" id="UtU-RT-4DV"/>
-                            <constraint firstItem="Xg5-vt-thq" firstAttribute="top" secondItem="cX0-Hk-nyh" secondAttribute="bottom" constant="8" symbolic="YES" id="dhz-N5-zUu"/>
-                            <constraint firstItem="e6e-00-WvH" firstAttribute="top" secondItem="Xg5-vt-thq" secondAttribute="bottom" constant="95" id="dm0-2x-n4F"/>
+                            <constraint firstItem="lzc-C6-RfU" firstAttribute="leading" secondItem="e6e-00-WvH" secondAttribute="leading" id="bRL-lX-tgG"/>
                             <constraint firstItem="FfA-Ip-GPW" firstAttribute="centerX" secondItem="hf1-EW-Kr9" secondAttribute="centerX" id="e3e-j7-wZA"/>
+                            <constraint firstItem="Xg5-vt-thq" firstAttribute="top" secondItem="cX0-Hk-nyh" secondAttribute="bottom" constant="8" symbolic="YES" id="eW2-5D-d5O"/>
                             <constraint firstItem="hf1-EW-Kr9" firstAttribute="centerX" secondItem="LTA-Jf-Xa2" secondAttribute="centerX" id="gmV-6D-iX5"/>
-                            <constraint firstItem="Xg5-vt-thq" firstAttribute="trailing" secondItem="hf1-EW-Kr9" secondAttribute="trailing" id="jq6-QI-FcP"/>
                             <constraint firstItem="aEK-Sn-WGv" firstAttribute="top" secondItem="FfA-Ip-GPW" secondAttribute="bottom" constant="105" id="o34-vw-13U"/>
-                            <constraint firstItem="hf1-EW-Kr9" firstAttribute="top" secondItem="lzc-C6-RfU" secondAttribute="bottom" constant="8" symbolic="YES" id="tfk-Yu-gL8"/>
-                            <constraint firstItem="FfA-Ip-GPW" firstAttribute="leading" secondItem="lzc-C6-RfU" secondAttribute="leading" id="yAv-Ux-Imw"/>
+                            <constraint firstItem="cX0-Hk-nyh" firstAttribute="leading" secondItem="Xg5-vt-thq" secondAttribute="leading" id="pWQ-eg-L8H"/>
+                            <constraint firstItem="hf1-EW-Kr9" firstAttribute="top" secondItem="lzc-C6-RfU" secondAttribute="bottom" constant="8" symbolic="YES" id="w9n-ke-PBQ"/>
+                            <constraint firstItem="Xg5-vt-thq" firstAttribute="trailing" secondItem="FfA-Ip-GPW" secondAttribute="trailing" id="zVB-2r-LnW"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="New Task" id="Kqx-qk-rxw">
