@@ -11,6 +11,7 @@ import UIKit
 class editTaskVC: UIViewController {
 
     // MARK: - Outlets and variables
+    @IBOutlet weak var scroller: UIScrollView!
     @IBOutlet weak var dateField: UITextField!
     @IBOutlet weak var newTitleField: UITextField!
     @IBOutlet weak var newDescField: UITextView!
@@ -20,6 +21,12 @@ class editTaskVC: UIViewController {
     // MARK: - Actions and Functions
     @IBAction func cancelButton(sender: AnyObject) {
         navigationController?.popViewControllerAnimated(true)
+    }
+    
+    @IBAction func hideKeyboard(sender: AnyObject) {
+        dateField.resignFirstResponder()
+        newTitleField.resignFirstResponder()
+        newDescField.resignFirstResponder()
     }
     
     @IBAction func updateButton(sender: AnyObject) {
@@ -57,6 +64,7 @@ class editTaskVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        scroller.contentSize = CGSize(width: 0.0, height: 600.0)
         dateFormatter.dateStyle = .MediumStyle
         let task = taskList[taskListIndex]
         newTitleField.text = task.valueForKey("taskTitle") as? String

@@ -12,6 +12,7 @@ import CoreData
 class addTaskVC: UIViewController {
 
     // MARK: - Outlets and Variables
+    @IBOutlet weak var scroller: UIScrollView!
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var descriptionField: UITextView!
     @IBOutlet weak var dateField: UITextField!
@@ -19,6 +20,13 @@ class addTaskVC: UIViewController {
     var userDate = NSDate!()
     
     // MARK: - Actions and Funcitons
+    @IBAction func hideKeyboard(sender: AnyObject) {
+        titleField.resignFirstResponder()
+        dateField.resignFirstResponder()
+        descriptionField.resignFirstResponder()
+        
+    }
+    
     @IBAction func cancelButton(sender: AnyObject) {
         navigationController?.popViewControllerAnimated(true)
     }
@@ -67,7 +75,7 @@ class addTaskVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        scroller.contentSize = CGSize(width: 0.0, height: 600.0)
         // Do any additional setup after loading the view.
     }
 
