@@ -32,6 +32,7 @@ class editTaskVC: UIViewController {
     @IBAction func updateButton(sender: AnyObject) {
         let task = taskList[taskListIndex]
         dateFormatter.dateStyle = .MediumStyle
+        dateFormatter.timeStyle = .ShortStyle
         
         task.setValue(newTitleField.text, forKey: "taskTitle")
         task.setValue(newDescField.text, forKey: "taskDescription")
@@ -57,6 +58,7 @@ class editTaskVC: UIViewController {
     
     func datePickerChanged(sender: UIDatePicker) {
         dateFormatter.dateStyle = .MediumStyle
+        dateFormatter.timeStyle = .ShortStyle
         dateField.text = dateFormatter.stringFromDate(sender.date)
         
     }
@@ -66,6 +68,7 @@ class editTaskVC: UIViewController {
         super.viewDidLoad()
         scroller.contentSize = CGSize(width: 0.0, height: 600.0)
         dateFormatter.dateStyle = .MediumStyle
+        dateFormatter.timeStyle = .ShortStyle
         let task = taskList[taskListIndex]
         newTitleField.text = task.valueForKey("taskTitle") as? String
         newDescField.text = task.valueForKey("taskDescription") as? String

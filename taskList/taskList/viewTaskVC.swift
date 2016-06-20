@@ -29,6 +29,7 @@ class viewTaskVC: UIViewController {
         super.viewDidLoad()
         scroller.contentSize = CGSize(width: 0.0, height: 600.0)
         dateFormatter.dateStyle = .MediumStyle
+        dateFormatter.timeStyle = .ShortStyle
         let task = taskList[taskListIndex]
 
         naviItem.title = task.valueForKey("taskTitle") as? String

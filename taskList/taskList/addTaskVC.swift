@@ -33,6 +33,7 @@ class addTaskVC: UIViewController {
     
     @IBAction func createButton(sender: AnyObject) {
         dateFormatter.dateStyle = .MediumStyle
+        dateFormatter.timeStyle = .ShortStyle
         userDate = dateFormatter.dateFromString(dateField.text!)!
         
         saveTask(titleField.text!, desc: descriptionField.text, taskDate: userDate!)
@@ -55,9 +56,19 @@ class addTaskVC: UIViewController {
         do{
             try managedContext.save()
             taskList.append(task)
+            setReminder(taskDate)
         } catch let error as NSError{
             print("Could not save \(error), \(error.userInfo)")
         }
+    }
+    
+    func setReminder(reminder: NSDate) {
+        let notification = UILocalNotification()
+        notification.fireDate = reminder
+        notification.alertBody = titleField.text
+        notification.alertAction = "view task"
+        notification.soundName = UILocalNotificationDefaultSoundName
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
     
     @IBAction func dateBeganEditing(sender: AnyObject) {
@@ -68,6 +79,7 @@ class addTaskVC: UIViewController {
     
     func datePickerChanged(sender: UIDatePicker) {
         dateFormatter.dateStyle = .MediumStyle
+        dateFormatter.timeStyle = .ShortStyle
         
         dateField.text = dateFormatter.stringFromDate(sender.date)
         
