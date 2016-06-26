@@ -16,7 +16,10 @@ class customCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        
+        if(taskedate.text == "Label"){
+            taskedate.hidden = true
+        }
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

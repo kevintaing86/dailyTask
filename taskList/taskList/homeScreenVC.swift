@@ -40,12 +40,10 @@ class homeScreenVC: UITableViewController {
 
     }
     
-    override func viewDidAppear(animated: Bool) {
-        
-        
+    override func viewWillAppear(animated: Bool) {
         tableView.reloadData()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -73,8 +71,9 @@ class homeScreenVC: UITableViewController {
         
         cell.taskTitle.text = task.valueForKey("taskTitle") as? String
         cell.taskDesc.text = task.valueForKey("taskDescription") as? String
-        cell.taskedate.text = dateFormatter.stringFromDate(task.valueForKey("taskDate") as! NSDate)
-        
+        if(task.valueForKey("taskDate") != nil){
+            cell.taskedate.text = dateFormatter.stringFromDate(task.valueForKey("taskDate") as! NSDate)
+        }
         return cell
     }
     
