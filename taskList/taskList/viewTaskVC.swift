@@ -34,8 +34,12 @@ class viewTaskVC: UIViewController {
 
         naviItem.title = task.valueForKey("taskTitle") as? String
         descField.text = task.valueForKey("taskDescription") as? String
-        dateLabel.text = dateFormatter.stringFromDate(task.valueForKey("taskDate") as! NSDate)
-        
+        if(task.valueForKey("taskDate") != nil){
+            dateLabel.text = dateFormatter.stringFromDate(task.valueForKey("taskDate") as! NSDate)
+        }
+        else{
+            dateLabel.hidden = true
+        }
         
         // Do any additional setup after loading the view.
     }
@@ -44,8 +48,10 @@ class viewTaskVC: UIViewController {
         let task = taskList[taskListIndex]
         naviItem.title = task.valueForKey("taskTitle") as? String
         descField.text = task.valueForKey("taskDescription") as? String
-        dateLabel.text = dateFormatter.stringFromDate(task.valueForKey("taskDate") as! NSDate)
-
+        if(task.valueForKey("taskDate") != nil){
+            dateLabel.text = dateFormatter.stringFromDate(task.valueForKey("taskDate") as! NSDate)
+        }
+        
     }
 
     override func didReceiveMemoryWarning() {

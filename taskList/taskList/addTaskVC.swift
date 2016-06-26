@@ -35,10 +35,13 @@ class addTaskVC: UIViewController {
         dateFormatter.dateStyle = .MediumStyle
         dateFormatter.timeStyle = .ShortStyle
         
-        if(dateField.text == "testettsfsdfsd"){
+        if(dateField.text != ""){
             userDate = dateFormatter.dateFromString(dateField.text!)!
+            saveTask(titleField.text!, desc: descriptionField.text, taskDate: userDate)
         }
-        saveTask(titleField.text!, desc: descriptionField.text)
+        else{
+            saveTask(titleField.text!, desc: descriptionField.text)
+        }
         navigationController?.popViewControllerAnimated(true)
     }
     

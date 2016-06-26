@@ -36,8 +36,10 @@ class editTaskVC: UIViewController {
         
         task.setValue(newTitleField.text, forKey: "taskTitle")
         task.setValue(newDescField.text, forKey: "taskDescription")
-        task.setValue(dateFormatter.dateFromString(dateField.text!), forKey: "taskDate")
-        
+        if(dateField.text != ""){
+            task.setValue(dateFormatter.dateFromString(dateField.text!), forKey: "taskDate")
+            setReminder(dateFormatter.dateFromString(dateField.text!)!)
+        }
         let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         let managedContext = appDelegate.managedObjectContext
         
@@ -63,6 +65,15 @@ class editTaskVC: UIViewController {
         
     }
     
+    func setReminder(reminder: NSDate) {
+        let notification = UILocalNotification()
+        notification.fireDate = reminder
+        notification.alertBody = newTitleField.text
+        notification.alertAction = "view task"
+        notification.soundName = UILocalNotificationDefaultSoundName
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)
+    }
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
