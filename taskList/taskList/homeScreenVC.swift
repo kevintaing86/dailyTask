@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import CoreData
 
 class homeScreenVC: UITableViewController {
 
     // MARK: - Outlets
-    
+    let dateFormatter = NSDateFormatter()
     
     // MARK: - Actions
     @IBAction func addButton(sender: AnyObject) {
@@ -22,13 +23,27 @@ class homeScreenVC: UITableViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
+        let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate
+        
+        let managedContext = appDelegate?.managedObjectContext
+        
+        let fetchRequest = NSFetchRequest(entityName: "TaskItem")
+        
+        do {
+            let results = try managedContext?.executeFetchRequest(fetchRequest)
+            taskList = results as! [NSManagedObject]
+        } catch let error as NSError{
+            print("Could not fetch \(error), \(error.userInfo)")
+        }
 
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewWillAppear(animated: Bool) {
         tableView.reloadData()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -47,12 +62,18 @@ class homeScreenVC: UITableViewController {
     }
 
     override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        dateFormatter.dateStyle = .MediumStyle
+        dateFormatter.timeStyle = .ShortStyle
         
         let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! customCell
         
-        cell.taskTitle.text = taskList[indexPath.row].title
-        cell.taskDesc.text = taskList[indexPath.row].description
+        let task = taskList[indexPath.row]
         
+        cell.taskTitle.text = task.valueForKey("taskTitle") as? String
+        cell.taskDesc.text = task.valueForKey("taskDescription") as? String
+        if(task.valueForKey("taskDate") != nil){
+            cell.taskedate.text = dateFormatter.stringFromDate(task.valueForKey("taskDate") as! NSDate)
+        }
         return cell
     }
     
@@ -66,7 +87,18 @@ class homeScreenVC: UITableViewController {
     override func tableView(tableView: UITableView, commitEditingStyle editingStyle: UITableViewCellEditingStyle, forRowAtIndexPath indexPath: NSIndexPath) {
         
         if(editingStyle == .Delete) {
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let managedContext = appDelegate.managedObjectContext
+            let task = taskList[indexPath.row]
             taskList.removeAtIndex(indexPath.row)
+            managedContext.deleteObject(task)
+            
+            do{
+             try managedContext.save()
+            } catch let error as NSError {
+                print("Error in saving after delete \(error)")
+            }
+            
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation: .Fade)
         }
         
