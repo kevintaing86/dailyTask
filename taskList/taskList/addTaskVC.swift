@@ -16,6 +16,7 @@ class addTaskVC: UIViewController {
     @IBOutlet weak var titleField: UITextField!
     @IBOutlet weak var descriptionField: UITextView!
     @IBOutlet weak var dateField: UITextField!
+    @IBOutlet weak var errorMsg: UILabel!
     let dateFormatter = NSDateFormatter()
     var userDate = NSDate?()
     
@@ -32,17 +33,26 @@ class addTaskVC: UIViewController {
     }
     
     @IBAction func createButton(sender: AnyObject) {
-        dateFormatter.dateStyle = .MediumStyle
-        dateFormatter.timeStyle = .ShortStyle
-        
-        if(dateField.text != ""){
-            userDate = dateFormatter.dateFromString(dateField.text!)!
-            saveTask(titleField.text!, desc: descriptionField.text, taskDate: userDate)
+        if(titleField.text == ""){
+            displayErrorMsg()
         }
         else{
-            saveTask(titleField.text!, desc: descriptionField.text)
+            dateFormatter.dateStyle = .MediumStyle
+            dateFormatter.timeStyle = .ShortStyle
+            
+            if(dateField.text != ""){
+                userDate = dateFormatter.dateFromString(dateField.text!)!
+                saveTask(titleField.text!, desc: descriptionField.text, taskDate: userDate)
+            }
+            else{
+                saveTask(titleField.text!, desc: descriptionField.text)
+            }
+            navigationController?.popViewControllerAnimated(true)
         }
-        navigationController?.popViewControllerAnimated(true)
+    }
+    
+    func displayErrorMsg() {
+        errorMsg.hidden = false
     }
     
     func saveTask(name: String, desc: String, taskDate: NSDate?) {
@@ -114,7 +124,8 @@ class addTaskVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        scroller.contentSize = CGSize(width: 0.0, height: 600.0)
+        //scroller.contentSize.height = 600
+        errorMsg.hidden = true
         // Do any additional setup after loading the view.
     }
 

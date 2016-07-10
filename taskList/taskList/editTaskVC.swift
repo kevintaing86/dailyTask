@@ -17,6 +17,7 @@ class editTaskVC: UIViewController {
     @IBOutlet weak var newDescField: UITextView!
     let dateFormatter = NSDateFormatter()
     var taskListIndex: Int!
+    @IBOutlet weak var errorMsg: UILabel!
     
     // MARK: - Actions and Functions
     @IBAction func cancelButton(sender: AnyObject) {
@@ -30,32 +31,42 @@ class editTaskVC: UIViewController {
     }
     
     @IBAction func updateButton(sender: AnyObject) {
-        let task = taskList[taskListIndex]
-        dateFormatter.dateStyle = .MediumStyle
-        dateFormatter.timeStyle = .ShortStyle
-        
-        task.setValue(newTitleField.text, forKey: "taskTitle")
-        task.setValue(newDescField.text, forKey: "taskDescription")
-        if(dateField.text != ""){
-            task.setValue(dateFormatter.dateFromString(dateField.text!), forKey: "taskDate")
-            setReminder(dateFormatter.dateFromString(dateField.text!)!)
+        if(newTitleField.text == ""){
+            displayErrorMsg()
         }
-        let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-        let managedContext = appDelegate.managedObjectContext
-        
-        do {
-            try managedContext.save()
-        } catch let error as NSError {
-            print("Error in updating/saving data \(error)")
+        else{
+            let task = taskList[taskListIndex]
+            dateFormatter.dateStyle = .MediumStyle
+            dateFormatter.timeStyle = .ShortStyle
+            
+            task.setValue(newTitleField.text, forKey: "taskTitle")
+            task.setValue(newDescField.text, forKey: "taskDescription")
+            if(dateField.text != ""){
+                task.setValue(dateFormatter.dateFromString(dateField.text!), forKey: "taskDate")
+                setReminder(dateFormatter.dateFromString(dateField.text!)!)
+            }
+            let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+            let managedContext = appDelegate.managedObjectContext
+            
+            do {
+                try managedContext.save()
+            } catch let error as NSError {
+                print("Error in updating/saving data \(error)")
+            }
+            
+            navigationController?.popViewControllerAnimated(true)
         }
-        
-        navigationController?.popViewControllerAnimated(true)
+
     }
     
     @IBAction func dateBeganEditing(sender: AnyObject) {
         let datePicker = UIDatePicker()
         dateField.inputView = datePicker
         datePicker.addTarget(self, action: #selector(editTaskVC.datePickerChanged(_:)), forControlEvents: .ValueChanged)
+    }
+    
+    func displayErrorMsg() {
+        errorMsg.hidden = false
     }
     
     func datePickerChanged(sender: UIDatePicker) {
@@ -77,6 +88,7 @@ class editTaskVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        errorMsg.hidden = true
         scroller.contentSize = CGSize(width: 0.0, height: 600.0)
         dateFormatter.dateStyle = .MediumStyle
         dateFormatter.timeStyle = .ShortStyle
