@@ -124,14 +124,48 @@ class addTaskVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //scroller.contentSize.height = 600
+        scroller.contentSize.height = 600
         errorMsg.hidden = true
-        // Do any additional setup after loading the view.
+        
+        
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(addTaskVC.keyboardWillShow(_:)),
+            name: UIKeyboardWillShowNotification,
+            object: nil
+        )
+        NSNotificationCenter.defaultCenter().addObserver(
+            self,
+            selector: #selector(addTaskVC.keyboardWillHide(_:)),
+            name: UIKeyboardWillHideNotification,
+            object: nil
+        )
+    }
+    
+    
+    func adjustInsetForKeyboardShow(show: Bool, notification: NSNotification) {
+        guard let value = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue else { return }
+        let keyboardFrame = value.CGRectValue()
+        let adjustmentHeight = (CGRectGetHeight(keyboardFrame) + 20) * (show ? 1 : -1)
+        scroller.contentInset.bottom += adjustmentHeight
+        scroller.scrollIndicatorInsets.bottom += adjustmentHeight
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        adjustInsetForKeyboardShow(true, notification: notification)
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        adjustInsetForKeyboardShow(false, notification: notification)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    deinit {
+        NSNotificationCenter.defaultCenter().removeObserver(self)
     }
     
 

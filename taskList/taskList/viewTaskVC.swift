@@ -11,7 +11,6 @@ import UIKit
 class viewTaskVC: UIViewController {
 
     // MARK: - Outlets and Variables
-    @IBOutlet weak var scroller: UIScrollView!
     @IBOutlet weak var dateLabel: UILabel!
     @IBOutlet weak var descField: UITextView!
     @IBOutlet weak var naviItem: UINavigationItem!
@@ -27,7 +26,7 @@ class viewTaskVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        scroller.contentSize = CGSize(width: 0.0, height: 600.0)
+
         dateFormatter.dateStyle = .MediumStyle
         dateFormatter.timeStyle = .ShortStyle
         let task = taskList[taskListIndex]
