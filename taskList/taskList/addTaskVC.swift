@@ -19,13 +19,14 @@ class addTaskVC: UIViewController {
     @IBOutlet weak var errorMsg: UILabel!
     let dateFormatter = NSDateFormatter()
     var userDate = NSDate?()
+    var activeField: UITextField?
+    var activeView: UITextView?
     
     // MARK: - Actions and Funcitons
     @IBAction func hideKeyboard(sender: AnyObject) {
         titleField.resignFirstResponder()
         dateField.resignFirstResponder()
         descriptionField.resignFirstResponder()
-        
     }
     
     @IBAction func cancelButton(sender: AnyObject) {
@@ -51,8 +52,32 @@ class addTaskVC: UIViewController {
         }
     }
     
+    @IBAction func dateBeganEditing(sender: AnyObject) {
+        let datePicker = UIDatePicker()
+        dateField.inputView = datePicker
+        datePicker.addTarget(self, action: #selector(addTaskVC.datePickerChanged(_:)), forControlEvents: .ValueChanged)
+    }
+    
     func displayErrorMsg() {
         errorMsg.hidden = false
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        activeField = nil
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        activeField = textField
+        print("Text field begain editing")
+    }
+    
+    func textViewDidEndEditing(textView: UITextView) {
+        activeView = nil
+    }
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        activeView = textView
+        print("Text view began editing")
     }
     
     func saveTask(name: String, desc: String, taskDate: NSDate?) {
@@ -108,12 +133,6 @@ class addTaskVC: UIViewController {
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
     
-    @IBAction func dateBeganEditing(sender: AnyObject) {
-        let datePicker = UIDatePicker()
-        dateField.inputView = datePicker
-        datePicker.addTarget(self, action: #selector(addTaskVC.datePickerChanged(_:)), forControlEvents: .ValueChanged)
-    }
-    
     func datePickerChanged(sender: UIDatePicker) {
         dateFormatter.dateStyle = .MediumStyle
         dateFormatter.timeStyle = .ShortStyle
@@ -125,6 +144,7 @@ class addTaskVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         scroller.contentSize.height = 600
+        scroller.contentSize.width = 0
         errorMsg.hidden = true
         
         
@@ -142,21 +162,41 @@ class addTaskVC: UIViewController {
         )
     }
     
-    
-    func adjustInsetForKeyboardShow(show: Bool, notification: NSNotification) {
-        guard let value = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue else { return }
-        let keyboardFrame = value.CGRectValue()
-        let adjustmentHeight = (CGRectGetHeight(keyboardFrame) + 20) * (show ? 1 : -1)
-        scroller.contentInset.bottom += adjustmentHeight
-        scroller.scrollIndicatorInsets.bottom += adjustmentHeight
-    }
-    
     func keyboardWillShow(notification: NSNotification) {
-        adjustInsetForKeyboardShow(true, notification: notification)
+        print("I am in the will show func")
+        
+        if let activeField = self.activeField, keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            print("I am in the text field")
+            let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
+            self.scroller.contentInset = contentInsets
+            self.scroller.scrollIndicatorInsets = contentInsets
+            var aRect = self.view.frame
+            aRect.size.height -= keyboardSize.size.height
+            if (!CGRectContainsPoint(aRect, activeField.frame.origin)) {
+                self.scroller.scrollRectToVisible(activeField.frame, animated: true)
+            }
+        }
+        
+        
+        
+        
+        if let activeView = self.activeView, keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            print("Should adjust keyboard")
+            let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
+            self.scroller.contentInset = contentInsets
+            self.scroller.scrollIndicatorInsets = contentInsets
+            var aRect = self.view.frame
+            aRect.size.height -= keyboardSize.size.height
+            if (!CGRectContainsPoint(aRect, activeView.frame.origin)) {
+                self.scroller.scrollRectToVisible(activeView.frame, animated: true)
+            }
+        }
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        adjustInsetForKeyboardShow(false, notification: notification)
+        let contentInsets = UIEdgeInsetsZero
+        self.scroller.contentInset = contentInsets
+        self.scroller.scrollIndicatorInsets = contentInsets
     }
 
     override func didReceiveMemoryWarning() {

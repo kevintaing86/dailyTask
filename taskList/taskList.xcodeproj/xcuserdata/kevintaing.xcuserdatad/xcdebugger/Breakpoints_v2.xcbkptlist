@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "taskList/addTaskVC.swift"
-            timestampString = "489884603.183998"
+            timestampString = "490157798.199132"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "21"
@@ -120,11 +120,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "taskList/addTaskVC.swift"
-            timestampString = "489884924.206268"
+            timestampString = "490158957.957089"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "50"
-            endingLineNumber = "50"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "createButton(_:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -136,11 +136,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "taskList/addTaskVC.swift"
-            timestampString = "489884924.206268"
+            timestampString = "490159960.381006"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "saveTask(_:desc:taskDate:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -152,11 +152,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "taskList/addTaskVC.swift"
-            timestampString = "489884924.206268"
+            timestampString = "490159960.381006"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "58"
-            endingLineNumber = "58"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "saveTask(_:desc:taskDate:)"
             landmarkType = "5">
          </BreakpointContent>
@@ -184,12 +184,76 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "taskList/addTaskVC.swift"
-            timestampString = "489884603.183998"
+            timestampString = "490159960.381006"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "27"
-            endingLineNumber = "27"
-            landmarkName = "hideKeyboard(_:)"
+            startingLineNumber = "168"
+            endingLineNumber = "168"
+            landmarkName = "keyboardWillShow(_:)"
+            landmarkType = "5">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "taskList.addTaskVC.keyboardWillShow (__ObjC.NSNotification) -&gt; ()"
+                  moduleName = "taskList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevintaing/GitHub/dailyTask/taskList/taskList/addTaskVC.swift"
+                  timestampString = "490158959.261717"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "164"
+                  endingLineNumber = "164"
+                  offsetFromSymbolStart = "32">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "taskList.addTaskVC.keyboardWillShow (__ObjC.NSNotification) -&gt; ()"
+                  moduleName = "taskList"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/kevintaing/GitHub/dailyTask/taskList/taskList/addTaskVC.swift"
+                  timestampString = "490158959.26201"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "164"
+                  endingLineNumber = "164"
+                  offsetFromSymbolStart = "84">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "taskList/addTaskVC.swift"
+            timestampString = "490159960.381006"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "175"
+            endingLineNumber = "175"
+            landmarkName = "keyboardWillShow(_:)"
+            landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "taskList/addTaskVC.swift"
+            timestampString = "490160228.615779"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "194"
+            endingLineNumber = "194"
+            landmarkName = "keyboardWillShow(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
