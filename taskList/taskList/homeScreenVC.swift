@@ -74,6 +74,9 @@ class homeScreenVC: UITableViewController {
         if(task.valueForKey("taskDate") != nil){
             cell.taskedate.text = dateFormatter.stringFromDate(task.valueForKey("taskDate") as! NSDate)
         }
+        else{
+            cell.taskedate.text = ""
+        }
         return cell
     }
     
