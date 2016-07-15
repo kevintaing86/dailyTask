@@ -15,9 +15,11 @@ class editTaskVC: UIViewController {
     @IBOutlet weak var dateField: UITextField!
     @IBOutlet weak var newTitleField: UITextField!
     @IBOutlet weak var newDescField: UITextView!
+    @IBOutlet weak var errorMsg: UILabel!
     let dateFormatter = NSDateFormatter()
     var taskListIndex: Int!
-    @IBOutlet weak var errorMsg: UILabel!
+    var activeField: UITextField?
+    var activeView: UITextView?
     
     // MARK: - Actions and Functions
     @IBAction func cancelButton(sender: AnyObject) {
@@ -31,7 +33,7 @@ class editTaskVC: UIViewController {
     }
     
     @IBAction func updateButton(sender: AnyObject) {
-        if(newTitleField.text == ""){
+        if(newTitleField.text == "" || newTitleField.text?.characters.count > 100){
             displayErrorMsg()
         }
         else{
@@ -89,7 +91,7 @@ class editTaskVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         errorMsg.hidden = true
-        scroller.contentSize = CGSize(width: 0.0, height: 500.0)
+        scroller.contentSize.height = 500
         dateFormatter.dateStyle = .MediumStyle
         dateFormatter.timeStyle = .ShortStyle
         let task = taskList[taskListIndex]
@@ -114,20 +116,51 @@ class editTaskVC: UIViewController {
         // Do any additional setup after loading the view.
     }
     
-    func adjustInsetForKeyboardShow(show: Bool, notification: NSNotification) {
-        guard let value = notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue else { return }
-        let keyboardFrame = value.CGRectValue()
-        let adjustmentHeight = (CGRectGetHeight(keyboardFrame) + 10) * (show ? 1 : -1)
-        scroller.contentInset.bottom += adjustmentHeight
-        scroller.scrollIndicatorInsets.bottom += adjustmentHeight
+    func textFieldDidBeginEditing(textField: UITextField) {
+        activeField = textField
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        activeField = nil
+    }
+    
+    func textViewShouldBeginEditing(textView: UITextView)-> Bool {
+        activeView = textView
+        return true
+    }
+    
+    func textViewDidEndEditing(textVieww: UITextView) {
+        activeView = nil
     }
     
     func keyboardWillShow(notification: NSNotification) {
-        adjustInsetForKeyboardShow(true, notification: notification)
+        if let activeField = self.activeField, keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
+            self.scroller.contentInset = contentInsets
+            self.scroller.scrollIndicatorInsets = contentInsets
+            var aRect = self.view.frame
+            aRect.size.height -= keyboardSize.size.height
+            if (!CGRectContainsPoint(aRect, activeField.frame.origin)) {
+                self.scroller.scrollRectToVisible(activeField.frame, animated: true)
+            }
+        }
+        
+        if let activeView = self.activeView, keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
+            let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
+            self.scroller.contentInset = contentInsets
+            self.scroller.scrollIndicatorInsets = contentInsets
+            var aRect = self.view.frame
+            aRect.size.height -= keyboardSize.size.height
+            if (!CGRectContainsPoint(aRect, activeView.frame.origin)) {
+                self.scroller.scrollRectToVisible(activeView.frame, animated: true)
+            }
+        }
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        adjustInsetForKeyboardShow(false, notification: notification)
+        let contentInsets = UIEdgeInsetsZero
+        self.scroller.contentInset = contentInsets
+        self.scroller.scrollIndicatorInsets = contentInsets
     }
 
     override func didReceiveMemoryWarning() {

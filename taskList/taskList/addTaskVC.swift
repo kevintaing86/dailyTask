@@ -34,7 +34,7 @@ class addTaskVC: UIViewController {
     }
     
     @IBAction func createButton(sender: AnyObject) {
-        if(titleField.text == ""){
+        if(titleField.text == "" || titleField.text?.characters.count > 100){
             displayErrorMsg()
         }
         else{
@@ -68,16 +68,15 @@ class addTaskVC: UIViewController {
     
     func textFieldDidBeginEditing(textField: UITextField) {
         activeField = textField
-        print("Text field begain editing")
     }
     
     func textViewDidEndEditing(textView: UITextView) {
         activeView = nil
     }
     
-    func textViewDidBeginEditing(textView: UITextView) {
+    func textViewShouldBeginEditing(textView: UITextView)-> Bool {
         activeView = textView
-        print("Text view began editing")
+        return true
     }
     
     func saveTask(name: String, desc: String, taskDate: NSDate?) {
@@ -143,8 +142,7 @@ class addTaskVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        scroller.contentSize.height = 600
-        scroller.contentSize.width = 0
+        scroller.contentSize.height = 500
         errorMsg.hidden = true
         
         
@@ -163,10 +161,7 @@ class addTaskVC: UIViewController {
     }
     
     func keyboardWillShow(notification: NSNotification) {
-        print("I am in the will show func")
-        
         if let activeField = self.activeField, keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            print("I am in the text field")
             let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
             self.scroller.contentInset = contentInsets
             self.scroller.scrollIndicatorInsets = contentInsets
@@ -177,11 +172,7 @@ class addTaskVC: UIViewController {
             }
         }
         
-        
-        
-        
         if let activeView = self.activeView, keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.CGRectValue() {
-            print("Should adjust keyboard")
             let contentInsets = UIEdgeInsets(top: 0.0, left: 0.0, bottom: keyboardSize.height, right: 0.0)
             self.scroller.contentInset = contentInsets
             self.scroller.scrollIndicatorInsets = contentInsets
@@ -198,7 +189,7 @@ class addTaskVC: UIViewController {
         self.scroller.contentInset = contentInsets
         self.scroller.scrollIndicatorInsets = contentInsets
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
