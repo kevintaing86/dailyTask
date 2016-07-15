@@ -92,14 +92,17 @@ class editTaskVC: UIViewController {
         super.viewDidLoad()
         errorMsg.hidden = true
         scroller.contentSize.height = 500
+        
         dateFormatter.dateStyle = .MediumStyle
         dateFormatter.timeStyle = .ShortStyle
+        
         let task = taskList[taskListIndex]
         newTitleField.text = task.valueForKey("taskTitle") as? String
-        newDescField.text = task.valueForKey("taskDescription") as? String
-        dateField.text = dateFormatter.stringFromDate(task.valueForKey("taskDate") as! NSDate)
-        
-        
+        if(task.valueForKey("taskDescription") != nil && task.valueForKey("taskDate") != nil) {
+            newDescField.text = task.valueForKey("taskDescription") as? String
+            dateField.text = dateFormatter.stringFromDate(task.valueForKey("taskDate") as! NSDate)
+        }
+
         NSNotificationCenter.defaultCenter().addObserver(
             self,
             selector: #selector(editTaskVC.keyboardWillShow(_:)),
