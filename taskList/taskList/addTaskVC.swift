@@ -96,7 +96,7 @@ class addTaskVC: UIViewController {
             do{
                 try managedContext.save()
                 taskList.append(task)
-                setReminder(taskDate!)
+                setReminder(taskDate!, taskTitle: name)
             } catch let error as NSError{
                 print("Could not save \(error), \(error.userInfo)")
             }
@@ -123,12 +123,13 @@ class addTaskVC: UIViewController {
         }
     }
     
-    func setReminder(reminder: NSDate) {
+    func setReminder(reminder: NSDate, taskTitle: String) {
         let notification = UILocalNotification()
         notification.fireDate = reminder
         notification.alertBody = titleField.text
         notification.alertAction = "view task"
         notification.soundName = UILocalNotificationDefaultSoundName
+        notification.userInfo = ["taskTitle":taskTitle]
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
     

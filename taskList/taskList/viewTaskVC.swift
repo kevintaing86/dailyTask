@@ -26,11 +26,10 @@ class viewTaskVC: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         dateFormatter.dateStyle = .MediumStyle
         dateFormatter.timeStyle = .ShortStyle
         let task = taskList[taskListIndex]
-
         naviItem.title = task.valueForKey("taskTitle") as? String
         descField.text = task.valueForKey("taskDescription") as? String
         if(task.valueForKey("taskDate") != nil){
@@ -44,11 +43,17 @@ class viewTaskVC: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
+        dateFormatter.dateStyle = .MediumStyle
+        dateFormatter.timeStyle = .ShortStyle
         let task = taskList[taskListIndex]
         naviItem.title = task.valueForKey("taskTitle") as? String
         descField.text = task.valueForKey("taskDescription") as? String
         if(task.valueForKey("taskDate") != nil){
+            dateLabel.hidden = false
             dateLabel.text = dateFormatter.stringFromDate(task.valueForKey("taskDate") as! NSDate)
+        }
+        else{
+            dateLabel.hidden = true
         }
         
     }

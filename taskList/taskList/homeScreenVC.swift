@@ -93,6 +93,13 @@ class homeScreenVC: UITableViewController {
             let appDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
             let managedContext = appDelegate.managedObjectContext
             let task = taskList[indexPath.row]
+            
+            for notification in UIApplication.sharedApplication().scheduledLocalNotifications!{
+                if(notification.userInfo!["taskTitle"] as! String == task.valueForKey("taskTitle") as! String){
+                    UIApplication.sharedApplication().cancelLocalNotification(notification)
+                }
+            }
+            
             taskList.removeAtIndex(indexPath.row)
             managedContext.deleteObject(task)
             

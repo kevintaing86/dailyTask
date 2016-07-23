@@ -41,6 +41,18 @@ class editTaskVC: UIViewController {
             dateFormatter.dateStyle = .MediumStyle
             dateFormatter.timeStyle = .ShortStyle
             
+            for notification in UIApplication.sharedApplication().scheduledLocalNotifications! {
+                print(notification)
+            }
+            
+            if(newTitleField.text != (task.valueForKey("taskTitle") as! String)) {
+                for notification in UIApplication.sharedApplication().scheduledLocalNotifications! {
+                    if(notification.userInfo!["taskTitle"] as! String == task.valueForKey("taskTitle") as! String){
+                        UIApplication.sharedApplication().cancelLocalNotification(notification)
+                    }
+                }
+            }
+            
             task.setValue(newTitleField.text, forKey: "taskTitle")
             task.setValue(newDescField.text, forKey: "taskDescription")
             if(dateField.text != ""){
@@ -84,6 +96,7 @@ class editTaskVC: UIViewController {
         notification.alertBody = newTitleField.text
         notification.alertAction = "view task"
         notification.soundName = UILocalNotificationDefaultSoundName
+        notification.userInfo = ["taskTitle": newTitleField.text!]
         UIApplication.sharedApplication().scheduleLocalNotification(notification)
     }
 
@@ -98,8 +111,10 @@ class editTaskVC: UIViewController {
         
         let task = taskList[taskListIndex]
         newTitleField.text = task.valueForKey("taskTitle") as? String
-        if(task.valueForKey("taskDescription") != nil && task.valueForKey("taskDate") != nil) {
+        if(task.valueForKey("taskDescription") != nil) {
             newDescField.text = task.valueForKey("taskDescription") as? String
+        }
+        if(task.valueForKey("taskDate") != nil) {
             dateField.text = dateFormatter.stringFromDate(task.valueForKey("taskDate") as! NSDate)
         }
 
